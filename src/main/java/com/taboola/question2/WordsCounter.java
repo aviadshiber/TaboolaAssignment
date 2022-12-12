@@ -17,6 +17,14 @@ import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 
+/**
+ * WordsCounter `loads` files and compute in parallel on each file
+ * the word count using ConcurrentHashMap<String, LongAdder>.
+ * with LongAdder we can increment on several keys with lock-free algorithms
+ * which are great for performance (assuming there are no cache misses).
+ *
+ * the `displayStatus` await for the results, and finally write them to the writer.
+ */
 @Slf4j
 public class WordsCounter {
 

@@ -1,5 +1,9 @@
 package com.taboola.question2;
 
+/**
+ * An MVP for question 2.
+ * same as presented in the document.
+ */
 public class SolutionTwo implements Runnable{
     @Override
     public void run() {
