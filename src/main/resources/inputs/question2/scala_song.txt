@@ -1,0 +1,24 @@
+Scala is better than Java
+In many ways you see
+It's more concise and elegant
+And oh so easy to use
+
+With its functional features
+It's more powerful than Java
+It can handle complex tasks
+And make your code more robust
+
+Scala also has traits
+Which make code reuse a breeze
+You can mix and match them
+To create customized classes
+
+And with its support for concurrency
+Scala can handle multiple threads
+It makes your code more efficient
+And helps you avoid those nasty deadlocks
+
+So if you want a language that's versatile and strong
+Give Scala a try
+You'll be amazed at what you can do
+And how much better your code can be
