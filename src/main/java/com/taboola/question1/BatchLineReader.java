@@ -9,7 +9,7 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class BatchLineReader {
+public class BatchLineReader implements AutoCloseable{
     private final int batchSize;
     private final BufferedReader br;
 
@@ -54,5 +54,10 @@ public class BatchLineReader {
                         iter,
                         Spliterator.ORDERED | Spliterator.NONNULL),
                 false);
+    }
+
+    @Override
+    public void close() throws Exception {
+        br.close();
     }
 }

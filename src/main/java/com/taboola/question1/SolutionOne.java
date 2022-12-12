@@ -5,24 +5,32 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
+/**
+ * An MVP example of using the SevenSegmentDisplayParser.
+ * we read batch of 4 lines, in serial on each file
+ * and using the SevenSegmentDisplayParser to parse the 7 segment display representation to numbers.
+ */
 @Slf4j
 public class SolutionOne implements Runnable {
     private static final SevenSegmentDisplayParser parser = new SevenSegmentDisplayParser();
     private final static int batchSize = 4;
+    private final String[] filePaths = new String[]{
+            "src/main/resources/inputs/question1/input_Q1a.txt",
+            "src/main/resources/inputs/question1/input_Q1b.txt"
+    };
 
     @SneakyThrows
     @Override
     public void run() {
         @Cleanup Writer writer = new PrintWriter(System.out);
-        String[] filePaths = new String[]{
-                "src/main/resources/inputs/question1/input_Q1a.txt",
-                "src/main/resources/inputs/question1/input_Q1b.txt"
-        };
 
         for (String path : filePaths) {
             parse7SegmentFile(path, writer);
@@ -31,17 +39,8 @@ public class SolutionOne implements Runnable {
     }
 
     private static void parse7SegmentFile(String filePath, Writer writer) throws IOException {
-        @Cleanup val br = Files.newBufferedReader(Paths.get(filePath), StandardCharsets.UTF_8);
-        val batchReader = new BatchLineReader(br, batchSize);
-        @Cleanup val parsedStream =
-                batchReader.stream().map(parser)
-                        .onClose(() -> {
-                            try {
-                                writer.flush();
-                            } catch (IOException e) {
-                                log.error(String.valueOf(e));
-                            }
-                        });
+        @Cleanup val batchReader = new BatchLineReader(Files.newBufferedReader(Paths.get(filePath), StandardCharsets.UTF_8), batchSize);
+        @Cleanup val parsedStream = getParsedStream(writer, batchReader);
 
         parsedStream.forEach(parsed -> {
             try {
@@ -50,6 +49,16 @@ public class SolutionOne implements Runnable {
                 log.error(String.valueOf(e));
             }
         });
+    }
 
+    private static Stream<String> getParsedStream(Writer writer, BatchLineReader batchReader) {
+        return batchReader.stream().map(parser)
+                .onClose(() -> {
+                    try {
+                        writer.flush();
+                    } catch (IOException e) {
+                        log.error(String.valueOf(e));
+                    }
+                });
     }
 }
