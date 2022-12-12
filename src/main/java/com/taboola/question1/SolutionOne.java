@@ -38,7 +38,8 @@ public class SolutionOne implements Runnable {
         }
     }
 
-    private static void parse7SegmentFile(String filePath, Writer writer) throws IOException {
+    @SneakyThrows
+    private static void parse7SegmentFile(String filePath, Writer writer) {
         @Cleanup val batchReader = new BatchLineReader(Files.newBufferedReader(Paths.get(filePath), StandardCharsets.UTF_8), batchSize);
         @Cleanup val parsedStream = getParsedStream(writer, batchReader);
 
