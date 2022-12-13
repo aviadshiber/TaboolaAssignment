@@ -24,7 +24,7 @@ to run the first question solution `<question_number> = 1` otherwise solution 2 
 - The parser is the main component in that solution, the way it works is it flattening each 3 columns in a single line, and then transform it to a digit, for each 3 columns.
     - hence I made some assumptions to make it simple (which were approved):
         - the number of columns is divisible by 3.
-        - the number of lines are devisable by 4.
+        - the number of lines are divisible by 4.
         - each segment is represented as 4 lines, and can fit into memory
 - the design is parsing files in serial manner by reading batches of 4 lines , just as an MVP for the solution, this can be easily be generalized to other big data framework/library that divide the load between cluster of nodes. The parser is basically a pure function from `String` to `String`.
 
