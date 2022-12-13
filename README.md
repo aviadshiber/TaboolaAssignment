@@ -31,7 +31,7 @@ to run the first question solution `<question_number> = 1` otherwise solution 2 
 ### Question 2 Design:
 - As requested I used `ConcurrentHashMap` to count the frequency of words in several file paths as input. The Map is mapping from token to it's frequency using `LongAdder` as a thread safe counter, to count in a concurrent manner without using locks - this should improve performance dramatically.
 - each file is processed in parallel using `ExecutorSerivce` when calling the `load(files)` method.
-- when calling to `displayStatus()` it will block final result is ready , and the result will be written to a general `Writer` (by default it is the output channel).
+- when calling to `displayStatus()` it will block until the final result is ready , and the result will be written to a general `Writer` (by default it is the output channel).
 - used `computeIfAbsent` instead of `putIfAbsent` which is more suitable.
 
 #### General notes:
