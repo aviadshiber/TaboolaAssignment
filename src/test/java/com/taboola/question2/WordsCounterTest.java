@@ -19,8 +19,8 @@ public class WordsCounterTest {
         // not ideal - we are working with IO here, but had no choice,
         // since the question requirement demands it
         wc.load(
-                "src/main/resources/inputs/question2/java_song.txt",
-                "src/main/resources/inputs/question2/scala_song.txt"
+                "inputs/question2/java_song.txt",
+                "inputs/question2/scala_song.txt"
         );
         wc.displayStatus();
         assertThat(writer.toString(), containsString("code 5"));

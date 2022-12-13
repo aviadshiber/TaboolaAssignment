@@ -9,20 +9,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 
+import static com.taboola.FileUtils.newBufferedReader;
+
 /**
  * WordsCounter `loads` files and compute in parallel on each file
  * the word count using ConcurrentHashMap<String, LongAdder>.
  * with LongAdder we can increment on several keys with lock-free algorithms
  * which are great for performance (assuming there are no cache misses).
- *
  * the `displayStatus` await for the results, and finally write them to the writer.
  */
 @Slf4j
@@ -36,7 +35,7 @@ public class WordsCounter {
 
     public WordsCounter() {
         //initialize WordsCounter with default values:
-        this(10, TimeUnit.NANOSECONDS, new PrintWriter(System.out));
+        this(10, TimeUnit.MILLISECONDS, new PrintWriter(System.out));
     }
 
     public WordsCounter(long timeout, TimeUnit timeoutUnit, Writer writer) {
@@ -66,8 +65,8 @@ public class WordsCounter {
 
     }
 
-    private void countWordsInFile(String filePath) throws IOException {
-        @Cleanup val br = Files.newBufferedReader(Paths.get(filePath), StandardCharsets.UTF_8);
+    private void countWordsInFile(String filePath) {
+        @Cleanup val br = newBufferedReader(filePath, StandardCharsets.UTF_8);
 
         br.lines().map(l -> l.split("\\s+")).forEach(words -> {
             for (String word : words) {

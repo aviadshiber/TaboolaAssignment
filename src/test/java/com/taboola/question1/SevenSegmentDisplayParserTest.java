@@ -1,8 +1,6 @@
-package com.taboola;
+package com.taboola.question1;
 
-import com.taboola.question1.SevenSegmentDisplayParser;
 import org.junit.jupiter.api.Test;
-
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

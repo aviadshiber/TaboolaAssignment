@@ -8,9 +8,6 @@ import lombok.val;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 /**
@@ -23,8 +20,8 @@ public class SolutionOne implements Runnable {
     private static final SevenSegmentDisplayParser parser = new SevenSegmentDisplayParser();
     private final static int batchSize = 4;
     private final String[] filePaths = new String[]{
-            "src/main/resources/inputs/question1/input_Q1a.txt",
-            "src/main/resources/inputs/question1/input_Q1b.txt"
+            "inputs/question1/input_Q1a.txt",
+            "inputs/question1/input_Q1b.txt"
     };
 
     @SneakyThrows
@@ -40,7 +37,7 @@ public class SolutionOne implements Runnable {
 
     @SneakyThrows
     private static void parse7SegmentFile(String filePath, Writer writer) {
-        @Cleanup val batchReader = new BatchLineReader(Files.newBufferedReader(Paths.get(filePath), StandardCharsets.UTF_8), batchSize);
+        @Cleanup val batchReader = new BatchLineReader(filePath, batchSize);
         @Cleanup val parsedStream = getParsedStream(writer, batchReader);
 
         parsedStream.forEach(parsed -> {

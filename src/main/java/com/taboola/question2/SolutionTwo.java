@@ -8,9 +8,10 @@ public class SolutionTwo implements Runnable{
     @Override
     public void run() {
         WordsCounter wc = new WordsCounter();
+        //paths from resources:
         wc.load(
-                "src/main/resources/inputs/question2/java_song.txt",
-                "src/main/resources/inputs/question2/scala_song.txt"
+                "inputs/question2/java_song.txt",
+                "inputs/question2/scala_song.txt"
         );
         wc.displayStatus();
     }

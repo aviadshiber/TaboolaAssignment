@@ -3,19 +3,22 @@ package com.taboola.question1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class BatchLineReader implements AutoCloseable{
+import static com.taboola.FileUtils.newBufferedReader;
+
+public class BatchLineReader implements AutoCloseable {
     private final int batchSize;
     private final BufferedReader br;
 
-    public BatchLineReader(BufferedReader br, int batchSize){
-        this.br=br;
-        this.batchSize=batchSize;
+    public BatchLineReader(String filePath, int batchSize) {
+        this.br = newBufferedReader(filePath, StandardCharsets.UTF_8);
+        this.batchSize = batchSize;
     }
 
     public Stream<String> stream() {
@@ -40,8 +43,8 @@ public class BatchLineReader implements AutoCloseable{
             @Override
             public String next() {
                 StringBuilder fourLinesBuffer = new StringBuilder();
-                int page=0;
-                while(page<batchSize && hasNext()){
+                int page = 0;
+                while (page < batchSize && hasNext()) {
                     fourLinesBuffer.append(this.nextLine).append("\n");
                     nextLine = null;
                     page++;
