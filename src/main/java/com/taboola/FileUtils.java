@@ -8,12 +8,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 
 @UtilityClass
 public class FileUtils {
     public static BufferedReader newBufferedReader(String relativePath, Charset cs) {
-        CharsetDecoder decoder = cs.newDecoder();
+        val decoder = cs.newDecoder();
         val inputStream = getFileFromResourceAsStream(relativePath);
         Reader reader = new InputStreamReader(inputStream, decoder);
         return new BufferedReader(reader);
