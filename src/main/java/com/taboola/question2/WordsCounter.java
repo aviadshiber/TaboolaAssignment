@@ -65,6 +65,7 @@ public class WordsCounter {
 
     }
 
+    @SneakyThrows
     private void countWordsInFile(String filePath) {
         @Cleanup val br = newBufferedReader(filePath, StandardCharsets.UTF_8);
 
