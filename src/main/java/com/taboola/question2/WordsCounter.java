@@ -86,7 +86,6 @@ public class WordsCounter {
 
     @SneakyThrows
     public void displayStatus() {
-        Objects.requireNonNull(executor);
         log.info("Awaiting for results...");
         if (!executor.awaitTermination(timeout, timeoutUnit)) {
             log.warn("Timeout been reached, collecting results until now");
