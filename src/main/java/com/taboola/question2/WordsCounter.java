@@ -68,7 +68,7 @@ public class WordsCounter {
     @SneakyThrows
     private void countWordsInFile(String filePath) {
         @Cleanup val br = newBufferedReader(filePath, StandardCharsets.UTF_8);
-
+        //TODO: Separate read pool & compute pool with CompletableFuture
         br.lines().map(l -> l.split("\\s+")).forEach(words -> {
             for (String word : words) {
                 val key = normalize(word);
