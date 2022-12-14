@@ -1,4 +1,6 @@
 
+[![Java CI with Gradle](https://github.com/aviadshiber/TaboolaAssignment/actions/workflows/gradle.yml/badge.svg?event=push)](https://github.com/aviadshiber/TaboolaAssignment/actions/workflows/gradle.yml)
+
 # Taboola home assignment Solutions
 
 ### **Build**
