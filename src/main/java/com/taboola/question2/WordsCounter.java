@@ -35,7 +35,7 @@ public class WordsCounter {
 
     public WordsCounter() {
         //initialize WordsCounter with default values:
-        this(10, TimeUnit.MILLISECONDS, new PrintWriter(System.out));
+        this(100, TimeUnit.MILLISECONDS, new PrintWriter(System.out));
     }
 
     public WordsCounter(long timeout, TimeUnit timeoutUnit, Writer writer) {
