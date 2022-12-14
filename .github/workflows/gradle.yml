@@ -36,3 +36,8 @@ jobs:
       with:
         gradle-version: 7.6
         arguments: build --scan
+    - name: Archive test report
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test report
+        path: build/reports/tests/test
